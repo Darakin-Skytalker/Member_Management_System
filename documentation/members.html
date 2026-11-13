@@ -1,0 +1,49 @@
+{#
+    members.html: public list of approved members.
+    Rendered by members() in app.py, which passes in:
+        members: list of rows with "id", "name" and "avatar" (file name or
+                 empty) for every user whose status is "approved".
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main class="welcome">
+        <h1>Members</h1>
+        <h3>Members of X Organization</h3>
+
+        <div class="members-container">
+            {# One card per member; the {% else %} below runs when the list is empty #}
+            {% for member in members %}
+                <div class="member-card">
+                    {# Show the photo only if the member uploaded one
+                       (files live in static/images) #}
+                    {% if member.avatar %}
+                        <img src="{{ url_for('static', filename='images/' ~ member.avatar) }}"
+                            alt="{{ member.name }}'s photo">
+                    {% endif %}
+
+                    <h2>{{ member.name }}</h2>
+
+                    {# Link to this member's public profile page #}
+                    <a href="{{ url_for('profile', member_id=member.id) }}"
+                    class="btn">
+                        View Profile
+                    </a>
+
+                </div>
+            {% else %}
+                <p>No approved members yet.</p>
+            {% endfor %}
+        </div>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+{#
+    index.html: home page of the Member Management System.
+    Rendered by home() in app.py. It only shows links to the three
+    public pages: login, registration and the members list.
+    Comments written in this style are Jinja comments and never reach the
+    browser.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Management System</title>
+    {# Shared stylesheet (static/style.css) #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main class="welcome">
+        <h1>Member Management System</h1>
+
+        {# Navigation links styled as buttons #}
+        <a href="{{ url_for('login') }}" class="btn">Log in</a>
+        <a href="{{ url_for('register') }}" class="btn">Registration</a>
+        <a href="{{ url_for('members') }}" class="btn">Members</a>
+    </main>
+
+</body>
+</html>

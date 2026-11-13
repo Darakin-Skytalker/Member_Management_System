@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    
+    <main class="welcome">
+        <h1>Member Profile</h1>
+
+        <div id="profile-content">
+            {% if member.avatar %}
+                <img src="{{ url_for('static', filename='images/' ~ member.avatar) }}"
+                    alt="{{ member.name }}'s photo">
+            {% endif %}
+            <h2>{{ member.name }}</h2>
+            <p>Member ID: {{ member.id }}</p>
+            <p>Email: {{ member.email }}</p>
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    
+    <main class="welcome">
+    <h1>Member Registration</h1>
+    
+    <form id="registration-form" action="{{ url_for('register') }}" method="POST" enctype="multipart/form-data" >
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="national_id">National id</label>
+        <input type="text" id="national_id" name="national_id" required>
+
+        <label for="Phone_NO">Phone number</label>
+        <input type="text" id="Phone_NO" name="Phone_NO" required>
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="Birth_Date">Birth Date</label>
+        <input type="date" id="Birth_Date" name="Birth_Date" required>
+
+        <fieldset class="sex-group">
+            <legend>Sex</legend>
+
+            <label>
+                <input type="radio" name="sex" value="Male" required>
+                Male
+            </label>
+
+            <label>
+                <input type="radio" name="sex" value="Female">
+                Female
+            </label>
+        </fieldset>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <label for="confirm-password">Confirm password</label>
+        <input type="password" id="confirm-password"
+         name="confirm_password" required>
+
+        <label for="avatar">Profile Photo</label>
+        <input type="file" id="avatar" name="avatar" accept="image/*">
+
+
+        <button type="button" class="btn" id="preview-btn">
+            Preview
+        </button>
+    </form>
+
+    
+    <section id="preview-section" hidden>
+        <h2>Review Your Information</h2>
+
+        <div id="preview-content"></div>
+
+        <button type="button" class="btn" id="edit-btn">
+            Go Back and Edit
+        </button>
+
+        <button type="submit" form="registration-form" class="btn" id="confirm-btn">
+            Confirm Registration
+        </button>
+    </section>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

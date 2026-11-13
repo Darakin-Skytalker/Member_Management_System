@@ -1,0 +1,103 @@
+{#
+    register.html: membership application form.
+    Rendered by register() in app.py (GET); the form posts back to the same
+    route.
+
+    Two-step flow handled by static/script.js:
+      1. The person fills in the form and clicks "Preview" (a plain button,
+         so nothing is sent yet).
+      2. The form is hidden and the preview section is shown. "Go Back and
+         Edit" returns to the form; "Confirm Registration" submits it.
+    The field names below (including Phone_NO and Birth_Date) must match
+    what register() reads from request.form.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main class="welcome">
+    <h1>Member Registration</h1>
+
+    {# enctype="multipart/form-data" is required so the photo file is uploaded #}
+    <form id="registration-form" action="{{ url_for('register') }}" method="POST" enctype="multipart/form-data" >
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="national_id">National id</label>
+        <input type="text" id="national_id" name="national_id" required>
+
+        <label for="Phone_NO">Phone number</label>
+        <input type="text" id="Phone_NO" name="Phone_NO" required>
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="Birth_Date">Birth Date</label>
+        <input type="date" id="Birth_Date" name="Birth_Date" required>
+
+        {# Radio buttons: only one option can be chosen #}
+        <fieldset class="sex-group">
+            <legend>Sex</legend>
+
+            <label>
+                <input type="radio" name="sex" value="Male" required>
+                Male
+            </label>
+
+            <label>
+                <input type="radio" name="sex" value="Female">
+                Female
+            </label>
+        </fieldset>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        {# The server checks that both passwords match and are 8+ characters #}
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <label for="confirm-password">Confirm password</label>
+        <input type="password" id="confirm-password"
+         name="confirm_password" required>
+
+        {# Optional profile photo (the server accepts jpg, jpeg, png, gif, webp) #}
+        <label for="avatar">Profile Photo</label>
+        <input type="file" id="avatar" name="avatar" accept="image/*">
+
+
+        {# type="button" so it does NOT submit; script.js handles the click #}
+        <button type="button" class="btn" id="preview-btn">
+            Preview
+        </button>
+    </form>
+
+
+    {# Hidden until "Preview" is clicked. script.js fills #preview-content
+       with the entered values. #}
+    <section id="preview-section" hidden>
+        <h2>Review Your Information</h2>
+
+        <div id="preview-content"></div>
+
+        <button type="button" class="btn" id="edit-btn">
+            Go Back and Edit
+        </button>
+
+        {# Sits outside the <form>, so the form="registration-form"
+           attribute ties it to that form #}
+        <button type="submit" form="registration-form" class="btn" id="confirm-btn">
+            Confirm Registration
+        </button>
+    </section>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

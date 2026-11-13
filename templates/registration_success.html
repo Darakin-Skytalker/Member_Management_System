@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main class="welcome">
+        <h1>Registration Successful!</h1>
+
+        <p>Your application has been received and is awaiting administrator approval.</p>
+        <p>You can sign in once your application has been approved.</p>
+
+        <a href="{{ url_for('home') }}" class="btn">Back to Home</a>
+    </main>
+
+</body>
+</html>

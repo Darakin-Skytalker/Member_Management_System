@@ -1,0 +1,43 @@
+{#
+    login.html: login form.
+    Rendered by login() in app.py (GET). The form posts back to the same
+    route, which checks the credentials and redirects to the dashboard.
+#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main class="welcome">
+        <h1>Log in</h1>
+
+        {# Field names (email, password) must match what login() reads
+           from request.form #}
+        <form action="{{ url_for('login') }}" method="POST">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" class="btn" id="login-btn">
+            Log in
+            </button>
+        </form>
+
+        {# Links for people who don't have an account yet #}
+        <p style="margin-top: 50px; margin-bottom: 0;">Dont have registered yet? </p>
+        <a href="{{ url_for('register') }}" class="btn">
+            Registration
+        </a>
+        <a href="{{ url_for('home') }}">Back to Home</a>
+
+    </main>
+
+</body>
+</html>

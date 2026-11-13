@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main class="welcome">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, Administrator!</p>
+
+        <h2>Pending Registrations</h2>
+
+        <div class="pending-list">
+            {% for user in pending_users %}
+                <div class="pending-card">
+                    {% if user.avatar %}
+                        <img src="{{ url_for('static', filename='images/' ~ user.avatar) }}"
+                            alt="{{ user.name }}'s photo"
+                            class="pending-avatar">
+                    {% else %}
+                        <div class="pending-avatar-placeholder">No photo</div>
+                    {% endif %}
+                    <h3>{{ user.name }}</h3>
+                    <p>Email: {{ user.email }}</p>
+                    <p>Phone: {{ user.phone }}</p>
+
+                    <button class="btn review-btn"
+                            type="button"
+                            data-id="{{ user.id }}"
+                            data-name="{{ user.name }}"
+                            data-email="{{ user.email }}"
+                            data-phone="{{ user.phone }}"
+                            data-address="{{ user.address }}"
+                            data-national="{{ user.national_id }}"
+                            data-birthdate="{{ user.birth_date }}">
+                        Review
+                    </button>
+                </div>
+            {% else %}
+                <p>No pending applications.</p>
+            {% endfor %}
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="btn" id="dashboard-btn">Go to Dashboard</a>
+
+        <div id="review-section" hidden>
+            <h2>Application Details</h2>
+            <div id="applicant-details"></div>
+            <form action="{{ url_for('approve_application') }}" method="POST">
+                <input type="hidden" name="applicant_id" id="approve-applicant-id">
+                <button class="btn" type="submit">
+                    Approve
+                </button>
+            </form>
+
+            <form action="{{ url_for('reject_application') }}" method="POST">
+                <input type="hidden" name="applicant_id" id="reject-applicant-id">
+                <button class="btn" type="submit">
+                    Reject
+                </button>
+            </form>
+
+            <button class="btn" type="button" id="close-review-btn">
+                Close
+            </button>
+        </div>        
+
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

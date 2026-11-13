@@ -1,0 +1,232 @@
+/* style.css: shared stylesheet for every page of the Member Management
+   System (loaded from each template via url_for('static', ...)). */
+
+/* ---------- Page basics ---------- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f5f7;
+}
+
+/* Main white card that holds the content of each page */
+.welcome {
+    text-align: center;
+    padding: 40px;
+    margin: 50px auto;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Dark button style, used on both <a> links and <button> elements */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    background-color: #333333;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #555555;
+}
+
+/* Phones and small screens: tighter card, smaller heading, and buttons
+   stacked full width */
+@media (max-width: 600px) {
+    .welcome {
+        margin: 40px 16px;
+        padding: 24px 16px;
+    }
+
+    .welcome h1 {
+        font-size: 26px;
+    }
+
+    .btn {
+        display: block;
+        margin: 12px 0;
+    }
+}
+
+
+
+
+/* ---------- Forms ---------- */
+/* Fields stacked vertically with left-aligned text */
+.welcome form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+/* Text-style inputs (radio buttons and file pickers keep their defaults) */
+.welcome input:not([type="radio"]):not([type="file"]) {
+    padding: 10px;
+    border: 2px solid #4c4242;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.welcome input:focus {
+    outline: 2px solid #999999;
+    border-color: #666666;
+}
+
+.welcome label {
+    font-weight: 500;
+}
+
+
+.welcome input[type="file"] {
+    margin: 4px 0 12px;
+}
+
+/* <button class="btn"> needs its border removed and a font size, because
+   buttons don't inherit these the way links do */
+button.btn {
+    border: none;
+    font-size: 16px;
+}
+
+
+/* Makes the "hidden" attribute always win over other display rules. The
+   page scripts rely on this to show and hide sections. */
+[hidden] {
+    display: none !important;
+}
+
+/* When a <section> is visible inside the card (the registration preview),
+   remove the top margin so the card sits at the top of the page */
+.welcome:has(section:not([hidden])) {
+  margin-top: 0;
+}
+
+
+/* ---------- Members list (members.html) ---------- */
+.members-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 30px;
+}
+
+
+.member-card {
+    width: 220px;
+    padding: 20px;
+    background-color: rgb(225, 235, 236);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+/* Round profile photo */
+.member-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.member-card h2 {
+    color: #222222;
+    margin: 16px 0;
+}
+
+/* ---------- Member profile (profile.html) ---------- */
+#profile-content img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+/* ---------- Pending applications (admin.html) ---------- */
+.pending-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.pending-card {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.pending-card h3 {
+    margin-top: 0;
+}
+
+
+/* ---------- Flash messages (dashboard.html) ---------- */
+/* The extra class ("error" or "success") comes from the category passed
+   to flash() in app.py */
+.flash-message {
+    padding: 12px 16px;
+    margin: 15px 0;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.flash-message.error {
+    background-color: #fde8e8;
+    color: #b42318;
+    border: 1px solid #f5c2c2;
+}
+
+.flash-message.success {
+    background-color: #e6f4ea;
+    color: #187a3d;
+    border: 1px solid #b7dfc2;
+}
+
+/* Applicant photo on the admin page, and the grey circle shown when there
+   is no photo */
+.pending-avatar {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 12px;
+}
+
+.pending-avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+
+/* ---------- Dashboard action buttons (dashboard.html) ---------- */
+/* Buttons laid out in a four-column grid */
+.account-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    align-items: center;
+}
+
+.account-actions .btn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
